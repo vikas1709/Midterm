@@ -1,0 +1,22 @@
+<div class="wrap" itemscope itemtype="http://schema.org/Recipe">
+
+	<h1>{{ $ctrl.recipe.title }}</h1>
+
+	<img ng-src="images/home/{{$ctrl.mainImageUrl}}" style="width:100%;" class="recipe-detail-image" />
+
+	<ul class="recipe-thumbs">
+		<li ng-repeat="img in $ctrl.recipe.images">
+			<img ng-src="images/home/{{img}}" ng-click="$ctrl.setImage(img)" />
+		</li>
+	</ul>
+
+	<p>{{ $ctrl.recipe.description }}</p>
+
+	<h3>Ingredients</h3>
+	<ul class="ingredients">
+		<li ng-repeat="ingredient in $ctrl.recipe.ingredients">
+			{{ ingredient }}
+		</li>
+	</ul>
+
+</div>

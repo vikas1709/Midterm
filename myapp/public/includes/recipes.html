@@ -1,0 +1,13 @@
+<div class="wrap">
+	<ul>
+		<li ng-repeat="recipe in $ctrl.recipes">
+			<img ng-src="images/home/{{ recipe.image }}">
+			<div>
+				<h1>
+					<a href="/recipes/{{ recipe.name }}">{{ recipe.title }}</a>
+				</h1>
+				<p>{{ recipe.description }}</p>
+			</div>
+		</li>
+	</ul>
+</div>
