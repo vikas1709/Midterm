@@ -89,6 +89,10 @@ app.config(function config($locationProvider, $routeProvider) {
     template: '<recipe-list></recipe-list>'
   }).when('/recipes/:recipeId', {
     template: '<recipe-detail></recipe-detail>'
+  }).when('/reviews', {
+    template: '<review-list></review-list>'
+  }).when('/reviews/:reviewId', {
+    template: '<review-detail></review-detail>'
   });
   $locationProvider.html5Mode(true);
 });
@@ -105,15 +109,45 @@ app.component('recipeList', {
   }
 });
 
+app.component('reviewList', {
+  templateUrl: '/includes/reviews.html',
+
+  controller: function RecipeListController($http) {
+    var _this2 = this;
+
+    $http.get('data/reviews.json').then(function (response) {
+      return _this2.reviews = response.data;
+    });
+  }
+});
+
 app.component('recipeDetail', {
   templateUrl: '/includes/recipe-detail.html',
 
   controller: function RecipeDetailController($http, $routeParams) {
-    var _this2 = this;
+    var _this3 = this;
 
     $http.get('data/' + $routeParams.recipeId + '.json').then(function (response) {
-      _this2.recipe = response.data;
-      _this2.setImage(_this2.recipe.images[0]);
+      _this3.recipe = response.data;
+      _this3.setImage(_this3.recipe.images[0]);
+    });
+
+    this.setImage = function (imageUrl) {
+      this.mainImageUrl = imageUrl;
+    };
+  }
+
+});
+
+app.component('reviewDetail', {
+  templateUrl: '/includes/review-detail.html',
+
+  controller: function RecipeDetailController($http, $routeParams) {
+    var _this4 = this;
+
+    $http.get('data/' + $routeParams.reviewId + '.json').then(function (response) {
+      _this4.review = response.data;
+      _this4.setImage(_this4.review.images[0]);
     });
 
     this.setImage = function (imageUrl) {

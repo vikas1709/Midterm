@@ -14,6 +14,12 @@ app.config(
     }).
     when('/recipes/:recipeId', {
       template: '<recipe-detail></recipe-detail>'
+    }).
+    when('/reviews', {
+      template: '<review-list></review-list>'
+    }).
+    when('/reviews/:reviewId', {
+      template: '<review-detail></review-detail>'
     });
     $locationProvider.html5Mode(true);
   });
@@ -29,6 +35,17 @@ app.component('recipeList', {
   }
 });
 
+app.component('reviewList', {
+  templateUrl: '/includes/reviews.html',
+
+  controller: function RecipeListController( $http ) {
+  	
+    $http.get('data/reviews.json')
+    .then( response => this.reviews = response.data)
+
+  }
+});
+
 app.component('recipeDetail', {
   templateUrl: '/includes/recipe-detail.html',
 
@@ -37,6 +54,24 @@ app.component('recipeDetail', {
     .then(response => {
       this.recipe = response.data
       this.setImage(this.recipe.images[0])
+    })
+
+    this.setImage = function (imageUrl) {
+      this.mainImageUrl = imageUrl;
+    }
+
+  }
+
+});
+
+app.component('reviewDetail', {
+  templateUrl: '/includes/review-detail.html',
+
+  controller: function RecipeDetailController($http, $routeParams) {
+    $http.get('data/' + $routeParams.reviewId +  '.json')
+    .then(response => {
+      this.review = response.data
+      this.setImage(this.review.images[0])
     })
 
     this.setImage = function (imageUrl) {
