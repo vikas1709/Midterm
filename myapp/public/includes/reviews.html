@@ -1,0 +1,15 @@
+<div class="wrap">
+	<ul>
+		<li ng-repeat="review in $ctrl.reviews">
+			<img ng-src="images/restos/{{ review.image }}">
+			<div>
+                    <h1>{{review.title }}</h1>
+					<p>{{ review.description }}</p>
+					<h4>
+						<a href="/reviews/{{ review.name }}">Click here for more photos and reviews</a>
+					</h4>
+				
+			</div>
+		</li>
+	</ul>
+</div>

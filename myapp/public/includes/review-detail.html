@@ -1,0 +1,14 @@
+<div class="wrap" itemscope itemtype="http://schema.org/Recipe">
+
+	<h1>{{ $ctrl.review.title }}</h1>
+
+	<img ng-src="images/restos/{{$ctrl.review.mainImageUrl}}" style="width:100%;" class="recipe-detail-image" />
+    
+	<ul class="recipe-thumbs">
+		<li ng-repeat="img in $ctrl.review.images">
+			<img ng-src="images/ReviewImages/{{img}}" ng-click="$ctrl.setImage(img)" />
+        </li>
+    </ul>
+    <p ng-repeat="des in $ctrl.review.reviews">
+        {{ des }}</p>
+</div>
